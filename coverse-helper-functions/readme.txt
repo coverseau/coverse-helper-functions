@@ -1,19 +1,23 @@
 === COVERSE helper functions ===
 Contributors: Rado Faletič
 Tags: COVERSE, Formidable
-Requires at least: 6.0.0
-Tested up to: 6.1.1
-Stable tag: 1.0.0
+Requires at least: 6.2
+Tested up to: 6.2
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Some helper functions and shortcodes for use on the COVERSE website.
+Some helper functions and shortcodes for use on the COVERSE website. Requires Formidable Forms.
 
 == Description ==
 
-Some helper functions and shortcodes for use on the COVERSE website.
+Some helper functions and shortcodes for use on the COVERSE website. Requires Formidable Forms.
 
 == Changelog ==
+= 1.0.2 =
+* Fixed plugin update function.
+= 1.0.1 =
+* Added hook to check that Formidable Forms is installed and activated.
 = 1.0.0 =
 * Enabled automatic updating.
 = 0.2 =

@@ -2,10 +2,10 @@
 /*
 Plugin Name:  COVERSE helper functions
 Plugin URI:   https://coverse.org.au
-Description:  Some helper functions and shortcodes for use on the COVERSE website.
-Version:      1.0.0
-Requires at least: 6.0
-Requires PHP: 7.0
+Description:  Some helper functions and shortcodes for use on the COVERSE website. Requires Formidable Forms.
+Version:      1.0.2
+Requires at least: 6.2
+Requires PHP: 7.4
 Author:       Rado Faletič
 Author URI:   https://radofaletic.com
 License:      GPL v2 or later
@@ -15,7 +15,7 @@ Update URI:   https://RadoFaletic.com/plugins/info.json
 */
 
 if (!function_exists('RadoFaletic_com_check_for_updates')) {
-	function profile_photo_frame_check_for_updates($update, $plugin_data, $plugin_file) {
+	function RadoFaletic_com_check_for_updates($update, $plugin_data, $plugin_file) {
 		static $response = false;
 		if (empty($plugin_data['UpdateURI']) || !empty($update)) {
 			return $update;
@@ -34,6 +34,13 @@ if (!function_exists('RadoFaletic_com_check_for_updates')) {
 		}
 	}
 	add_filter('update_plugins_RadoFaletic.com', 'RadoFaletic_com_check_for_updates', 10, 3);
+}
+
+register_activation_hook( __FILE__, 'coverse_helper_functions_activate');
+function coverse_helper_functions_activate(){
+	if (!is_plugin_active('formidable/formidable.php') && current_user_can('activate_plugins')) {
+		wp_die('Sorry, but this plugin requires the <a href="https://wordpress.org/plugins/formidable/" target="_blank" rel="noreferrer noopener">Formidable Forms</a> plugin to be installed and active. <br><a href="' . admin_url('plugins.php') . '">« Return to Plugins</a>');
+	}
 }
 
 // Combined total for two or more fields. This creates a new shortcode [fields-stats] for use on your page. Your shortcode will look like this: [fields-stats ids="x,y,z"]. Replace x, y, and z with the IDs of the fields you want to total.
