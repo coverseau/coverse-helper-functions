@@ -3,7 +3,7 @@
 Plugin Name:  COVERSE helper functions
 Plugin URI:   https://coverse.org.au
 Description:  Some helper functions and shortcodes for use on the COVERSE website. Requires Formidable Forms.
-Version:      1.0.2
+Version:      1.0.3
 Requires at least: 6.2
 Requires PHP: 7.4
 Author:       Rado Faletič
@@ -11,29 +11,48 @@ Author URI:   https://radofaletic.com
 License:      GPL v2 or later
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  coverse-helper-functions
-Update URI:   https://RadoFaletic.com/plugins/info.json
+Update URI:   https://raw.githubusercontent.com/coverseau/coverse-helper-functions/refs/heads/main/update-info.json
 */
 
-if (!function_exists('RadoFaletic_com_check_for_updates')) {
-	function RadoFaletic_com_check_for_updates($update, $plugin_data, $plugin_file) {
-		static $response = false;
-		if (empty($plugin_data['UpdateURI']) || !empty($update)) {
-			return $update;
-		}
-		if ($response === false) {
-			$response = wp_remote_get($plugin_data['UpdateURI']);
-		}
-		if (empty($response['body'])) {
-			return $update;
-		}
-		$custom_plugins_data = json_decode($response['body'], true);
-		if (!empty($custom_plugins_data[$plugin_file])) {
-			return $custom_plugins_data[$plugin_file];
-		} else {
-			return $update;
-		}
+/**
+ * Plugin updater handler function.
+ * Pings the Github repo that hosts the plugin to check for updates.
+ */
+if (!function_exists('coverse_helper_functions_check_for_plugin_update')) {
+  function coverse_helper_functions_check_for_plugin_update($transient) {
+	// If no update transient or transient is empty, return.
+	if (empty($transient->checked)) {
+	  return $transient;
 	}
-	add_filter('update_plugins_RadoFaletic.com', 'RadoFaletic_com_check_for_updates', 10, 3);
+	
+	// Plugin slug, path to the main plugin file, and the URL of the update server
+	$plugin_slug = 'coverse-helper-functions/coverse-helper-functions.php';
+	$update_url = 'https://raw.githubusercontent.com/coverseau/coverse-helper-functions/refs/heads/main/update-info.json';
+	
+	// Fetch update information from your server
+	$response = wp_remote_get($update_url);
+	if (is_wp_error($response)) {
+	  return $transient;
+	}
+	
+	// Parse the JSON response (update_info.json must return the latest version details)
+	$update_info = json_decode(wp_remote_retrieve_body($response));
+	
+	// If a new version is available, modify the transient to reflect the update
+	if (version_compare($transient->checked[$plugin_slug], $update_info->new_version, '<')) {
+	  $plugin_data = array(
+		  'slug'        => 'coverse-helper-functions',
+		  'plugin'      => $plugin_slug,
+		  'new_version' => $update_info->new_version,
+		  'url'         => $update_info->url,
+		  'package'     => $update_info->package, // URL of the plugin zip file
+		);
+	  $transient->response[ $plugin_slug ] = (object) $plugin_data;
+	}
+	
+	return $transient;
+  }
+  add_filter('pre_set_coverse_helper_functions_transient_update_plugins', 'coverse_helper_functions_check_for_plugin_update');
 }
 
 register_activation_hook( __FILE__, 'coverse_helper_functions_activate');
