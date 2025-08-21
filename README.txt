@@ -3,7 +3,7 @@ Contributors: Rado Faletič
 Tags: COVERSE, Formidable
 Requires at least: 6.2
 Tested up to: 6.2
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,8 @@ Some helper functions and shortcodes for use on the COVERSE website. Requires Fo
 Some helper functions and shortcodes for use on the COVERSE website. Requires Formidable Forms.
 
 == Changelog ==
+= 1.0.4 =
+* Minor fixes.
 = 1.0.3 =
 * Changed update method to GitHub repository.
 = 1.0.2 =

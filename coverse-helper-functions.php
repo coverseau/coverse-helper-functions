@@ -3,7 +3,7 @@
 Plugin Name:  COVERSE helper functions
 Plugin URI:   https://coverse.org.au
 Description:  Some helper functions and shortcodes for use on the COVERSE website. Requires Formidable Forms.
-Version:      1.0.3
+Version:      1.0.4
 Requires at least: 6.2
 Requires PHP: 7.4
 Author:       Rado Faletič
@@ -58,7 +58,7 @@ if (!function_exists('coverse_helper_functions_check_for_plugin_update')) {
 register_activation_hook( __FILE__, 'coverse_helper_functions_activate');
 function coverse_helper_functions_activate(){
 	if (!is_plugin_active('formidable/formidable.php') && current_user_can('activate_plugins')) {
-		wp_die('Sorry, but this plugin requires the <a href="https://wordpress.org/plugins/formidable/" target="_blank" rel="noreferrer noopener">Formidable Forms</a> plugin to be installed and active. <br><a href="' . admin_url('plugins.php') . '">« Return to Plugins</a>');
+		wp_die('Sorry, but this plugin requires the <a href="https://wordpress.org/plugins/formidable/" target="_blank">Formidable Forms</a> plugin to be installed and active. <br><a href="' . admin_url('plugins.php') . '">« Return to Plugins</a>');
 	}
 }
 
