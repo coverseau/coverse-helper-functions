@@ -3,7 +3,7 @@
 Plugin Name:  COVERSE helper functions
 Plugin URI:   https://coverse.org.au
 Description:  Some helper functions and shortcodes for use on the COVERSE website. Requires Formidable Forms.
-Version:      1.0.4
+Version:      1.0.5
 Requires at least: 6.2
 Requires PHP: 7.4
 Author:       Rado Faletič
@@ -52,7 +52,7 @@ if (!function_exists('coverse_helper_functions_check_for_plugin_update')) {
 	
 	return $transient;
   }
-  add_filter('pre_set_coverse_helper_functions_transient_update_plugins', 'coverse_helper_functions_check_for_plugin_update');
+  add_filter('pre_set_site_transient_update_plugins', 'coverse_helper_functions_check_for_plugin_update');
 }
 
 register_activation_hook( __FILE__, 'coverse_helper_functions_activate');
