@@ -56,5 +56,6 @@ ehthumbs.db
 
 # other items
 .nova/
+*.xcworkspace
 coverse-helper-functions.zip
 

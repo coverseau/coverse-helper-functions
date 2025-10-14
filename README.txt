@@ -1,9 +1,10 @@
 === COVERSE helper functions ===
 Contributors: Rado Faletič
+Donate link: https://coverse.org.au/donate/
 Tags: COVERSE, Formidable
 Requires at least: 6.2
 Tested up to: 6.2
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +15,8 @@ Some helper functions and shortcodes for use on the COVERSE website. Requires Fo
 Some helper functions and shortcodes for use on the COVERSE website. Requires Formidable Forms.
 
 == Changelog ==
+= 1.0.6 =
+* Improved documentation.
 = 1.0.5 =
 * Fixed use of 'pre_set_site_transient_update_plugins' hook.
 = 1.0.4 =
